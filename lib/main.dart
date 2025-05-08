@@ -12,7 +12,22 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: AudioPlayerScreen());
+    return MaterialApp(
+      themeMode: ThemeMode.dark,
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.blueGrey,
+        scaffoldBackgroundColor: Colors.black,
+        cardColor: Colors.grey[900],
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
+        textTheme: const TextTheme(bodyMedium: TextStyle(color: Colors.white)),
+      ),
+      home: const AudioPlayerScreen(),
+    );
   }
 }
 
@@ -104,7 +119,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Audio Player')),
+      appBar: AppBar(centerTitle: true, title: const Text('Audio Player')),
       body: Column(
         children: [
           Expanded(
