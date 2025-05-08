@@ -112,7 +112,31 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
               itemCount: _songs.length,
               itemBuilder: (context, index) {
                 final song = _songs[index];
-                return ListTile(title: Text(song), onTap: () => _play(song));
+                final bool isSelected = song == _currentSong;
+                return Card(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 12.0,
+                    vertical: 4.0,
+                  ),
+                  elevation: 2.0,
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.music_note,
+                      color:
+                          isSelected
+                              ? Theme.of(context).primaryColor
+                              : Colors.grey,
+                    ),
+                    title: Text(
+                      song,
+                      style: TextStyle(
+                        fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.normal,
+                      ),
+                    ),
+                    onTap: () => _play(song),
+                  ),
+                );
               },
             ),
           ),
