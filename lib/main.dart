@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 
@@ -67,8 +67,6 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
       setState(() {
         _isPlaying = false;
         _currentSong = null;
-        _currentPosition = Duration.zero;
-        _totalDuration = Duration.zero;
       });
     });
   }
@@ -107,13 +105,15 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
     setState(() {
       _isPlaying = false;
       _currentSong = null;
-      _currentPosition = Duration.zero;
-      _totalDuration = Duration.zero;
     });
   }
 
   void _seek(Duration position) async {
     await _audioPlayer.seek(position);
+  }
+
+  String _durationFormat(Duration d) {
+    return d.toString().split('.').first.substring(2);
   }
 
   @override
@@ -164,7 +164,8 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
               },
             ),
             Text(
-              '${_currentPosition.toString().split('.').first.substring(2)} / ${_totalDuration.toString().split('.').first.substring(2)}',
+              '${_durationFormat(_currentPosition)} / '
+              '${_durationFormat(_totalDuration)}',
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
